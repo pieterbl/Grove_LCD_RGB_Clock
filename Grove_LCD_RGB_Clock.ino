@@ -3,7 +3,7 @@
 
  Copyright (c) 2020 Pieter Bloemendaal (https://github.com/pieterbl)
 
- Project Grove\_LCD\_RGB\_Clock
+ Project Grove_LCD_RGB_Clock
  (https://github.com/pieterbl/Grove_LCD_RGB_Clock)
 
  Permission is hereby granted, free of charge, to any person obtaining a copy
