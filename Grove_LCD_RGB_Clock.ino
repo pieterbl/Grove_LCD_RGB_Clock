@@ -3,7 +3,7 @@
 
  Copyright (c) 2020 Pieter Bloemendaal (https://github.com/pieterbl)
 
- Project Grove_RTC_DS1307_Extension
+ Project Grove\_LCD\_RGB\_Clock
  (https://github.com/pieterbl/Grove_LCD_RGB_Clock)
 
  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -48,11 +48,13 @@ void setup() {
 void loop() {
 
 	rgbLcd.setCursor(0, 0);
-	rgbLcd.print(clock.getDateTimeString());
+	rgbLcd.print(clock.getDateString());
 
-	// wait 500 ms until we continue (above) with printing.
-	// during the wait, we continue to "color-slide" every 20 ms.
-	lcdSlider.delayAndSlide(rgbLcd, 500, 20);
+	rgbLcd.setCursor(0, 1);
+	rgbLcd.print(clock.getTimeString());
+
+	// wait 300 ms until we continue (above) with printing date/time.
+	// during the wait, we continue to "color-slide" every 50 ms.
+	lcdSlider.delayAndSlide(rgbLcd, 300, 50);
 }
-
 
