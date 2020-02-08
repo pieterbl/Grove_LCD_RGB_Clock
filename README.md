@@ -2,6 +2,12 @@
 
 Grove LCD-RGB-Backlight Real-Time-Clock (RTC) and Temperature Display
 
+This project will combine a series of Grove components, into a nice and colorful, time and temperature display, using:
+
+- Grove LCD RGB Backlight - display
+- Grove RTC DS1307 - real-time clock
+- more to come
+
 ## License
 
 License information can be found [here](./LICENSE.md).
