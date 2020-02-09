@@ -37,12 +37,8 @@ ColorSlider lcdSlider(Colors::Orange, Colors::Magenta);
 GroveRtcDs1307 clock;
 
 void setup() {
-
-	rgbLcd.initialize();
-
-	// Sunday, 2020-FEB-02 14:30:00
 	clock.begin();
-	clock.initializeDayOfWeekYMDHMS(SUN, 2020, 2, 2, 14, 30, 0);
+	rgbLcd.initialize();
 }
 
 void loop() {
