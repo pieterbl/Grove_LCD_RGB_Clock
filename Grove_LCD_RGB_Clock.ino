@@ -26,28 +26,45 @@
  */
 
 #include <Arduino.h>
-#include "Grove_LCD_RGB_Backlight_Extension.hpp"
-#include "Grove_RTC_DS1307_Extension.hpp"
+#include <Grove_LCD_RGB_Backlight_Extension.hpp>
+#include <Grove_RTC_DS1307_Extension.hpp>
+#include <Grove_RTC_DS1307_TimeLibSyncProvider.hpp>
+#include <Time_Extension.hpp>
 
 // set up the LCD's number of columns and rows
 GroveLcdRgbBacklight rgbLcd(16, 2);
 ColorSlider lcdSlider(Colors::Orange, Colors::Magenta);
 
-// define clock
+// define DS1307 RTC clock
 GroveRtcDs1307 clock;
 
+// define Time_Extension wrapper for DS1307 RTC clock
+TimeExtension timeObj;
+
 void setup() {
+
+	Serial.begin(9600);
+
+	// begin DS1307 real-time-clock
 	clock.begin();
+
+	// synchronize Time library with DS1307 real-time-clock
+	GroveRtcDs1307TimeLibSyncProvider::initialize(&clock);
+
 	rgbLcd.initialize();
 }
 
 void loop() {
 
 	rgbLcd.setCursor(0, 0);
-	rgbLcd.print(clock.getDateString());
+	rgbLcd.print(timeObj.getDateString());
 
 	rgbLcd.setCursor(0, 1);
-	rgbLcd.print(clock.getTimeString());
+	rgbLcd.print(timeObj.getTimeString());
+
+	Serial.print("TimeLib: ");
+	Serial.println(timeObj.getDateTimeString());
+	Serial.println();
 
 	// wait 300 ms until we continue (above) with printing date/time.
 	// during the wait, we continue to "color-slide" every 50 ms.
