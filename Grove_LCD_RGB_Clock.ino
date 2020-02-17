@@ -36,7 +36,7 @@ GroveLcdRgbBacklight rgbLcd(16, 2);
 ColorSlider lcdSlider(Colors::Orange, Colors::Magenta);
 
 // define DS1307 RTC clock
-GroveRtcDs1307 clock;
+GroveRtcDs1307 ds1307Clock;
 
 // define Time_Extension wrapper for DS1307 RTC clock
 TimeExtension timeObj;
@@ -46,10 +46,10 @@ void setup() {
 	Serial.begin(9600);
 
 	// begin DS1307 real-time-clock
-	clock.begin();
+	ds1307Clock.begin();
 
 	// synchronize Time library with DS1307 real-time-clock
-	GroveRtcDs1307TimeLibSyncProvider::initialize(&clock);
+	GroveRtcDs1307TimeLibSyncProvider::initialize(&ds1307Clock);
 
 	rgbLcd.initialize();
 }
