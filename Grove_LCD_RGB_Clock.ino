@@ -54,16 +54,40 @@ void setup() {
 	rgbLcd.initialize();
 }
 
+// returns values from 0-3
+uint8_t getCol() {
+
+	time_t nowTime = timeObj.getNow();
+	tmElements_t timeLibTimeStruct;
+
+	// TimeLib::breakTime
+	::breakTime(nowTime, timeLibTimeStruct);
+
+	uint8_t col = timeLibTimeStruct.Second / 15;
+	return col;
+}
+
 void loop() {
 
+	uint8_t col = getCol();
+
 	rgbLcd.setCursor(0, 0);
+	rgbLcd.print("   "); // erase first cols, for when moving to the right
+	rgbLcd.setCursor(col, 0);
 	rgbLcd.print(timeObj.getDateString());
+	rgbLcd.print("   "); // erase last cols, for when moving to the left
 
 	rgbLcd.setCursor(0, 1);
+	rgbLcd.print("   "); // erase first cols, for when moving to the right
+	rgbLcd.setCursor(col, 1);
 	rgbLcd.print(timeObj.getTimeString());
+	rgbLcd.print("   "); // erase last cols, for when moving to the left
 
 	Serial.print("TimeLib: ");
 	Serial.println(timeObj.getDateTimeString());
+
+	Serial.print("col: ");
+	Serial.println(col);
 	Serial.println();
 
 	// wait 300 ms until we continue (above) with printing date/time.
