@@ -67,26 +67,23 @@ uint8_t getCol() {
 	return col;
 }
 
+void printOnLine(uint8_t col, uint8_t row, const String &text) {
+	rgbLcd.setCursor(0, row);
+	rgbLcd.print("   "); // erase first columns, for when moving to the right
+	rgbLcd.setCursor(col, row);
+	rgbLcd.print(text);
+	rgbLcd.print("   "); // erase last columns, for when moving to the left
+}
+
 void loop() {
 
 	uint8_t col = getCol();
-
-	rgbLcd.setCursor(0, 0);
-	rgbLcd.print("   "); // erase first cols, for when moving to the right
-	rgbLcd.setCursor(col, 0);
-	rgbLcd.print(timeObj.getDateString());
-	rgbLcd.print("   "); // erase last cols, for when moving to the left
-
-	rgbLcd.setCursor(0, 1);
-	rgbLcd.print("   "); // erase first cols, for when moving to the right
-	rgbLcd.setCursor(col, 1);
-	rgbLcd.print(timeObj.getTimeString());
-	rgbLcd.print("   "); // erase last cols, for when moving to the left
+	printOnLine(col, 0, timeObj.getDateString());
+	printOnLine(col, 1, timeObj.getTimeString());
 
 	Serial.print("TimeLib: ");
 	Serial.println(timeObj.getDateTimeString());
-
-	Serial.print("col: ");
+	Serial.print("Column: ");
 	Serial.println(col);
 	Serial.println();
 
